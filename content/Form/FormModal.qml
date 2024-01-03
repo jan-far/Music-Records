@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 
-
 Popup {
     id: popup
     width: parent.width * 0.6
@@ -21,14 +20,9 @@ Popup {
         NumberAnimation { property: "scale"; from: 1.0; to: 0.0 }
     }
 
-    signal saveRecord
-
-    property AddAlbumForm albumForm: addAlbumForm
-
     contentItem:
         AddAlbumForm {
-        id: addAlbumForm
-        onSubmitForm: saveRecord()
+        id: addAlbumForm            
     }
 }
 

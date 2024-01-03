@@ -28,7 +28,7 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
                 onTextChanged: () => {
-                                   console.log("vale: ", searchField.text)
+                                   rightContainerItem.searchValue = searchField.text.toLowerCase()
                                }
             }
         }

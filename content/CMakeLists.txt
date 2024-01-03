@@ -17,6 +17,7 @@ qt6_add_qml_module(content
         RightContainerItem.qml
         LeftContainerItem.qml
         CustomBorder.qml
+        ThemeSwitch.qml
     RESOURCES
         fonts/fonts.txt
     QML_FILES
@@ -25,9 +26,9 @@ qt6_add_qml_module(content
         Form/AddAlbumForm.qml
         Form/FormModal.qml
         Form/CustomTextField.qml
-        Form/InputStyles.qml
     QML_FILES
         Scripts.js
         SortFilterModel/SortFilterDelegateModel.qml
         SortFilterModel/SortHelper.qml
+        SortFilterModel/SortFilter.qml
 )

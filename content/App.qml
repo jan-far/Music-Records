@@ -8,15 +8,23 @@ import Music
 import QtQuick.Dialogs
 import Fileio
 import "Scripts.js" as Scripts
+import './Form'
+import "./Toast"
 
 Window {
     id: root
     width: mainScreen.width
     height: mainScreen.height
+    maximumWidth: mainScreen.width
+    maximumHeight: mainScreen.height
     visible: true
     title: "Music"
 
-    property ListModel musicRecordModel: musicRecords
+    property int switchStatus: 0
+
+    onSwitchStatusChanged: console.log("root: ", switchStatus)
+
+    Material.theme: switchStatus < 1 ? Material.Light : Material.Dark
 
     Fileio {
         id: fileio
@@ -28,45 +36,42 @@ Window {
 
     FormModal {
         id: formModal
-        onSaveRecord: Scripts.saveDocument(fileio, formModal, musicRecordModel, toast)
     }
 
     HomeScreen {
         id: mainScreen
-        onOpenModal:  formModal.open()
-        albumModel: musicRecordModel
     }
 
     ListModel {
         id: musicRecords
-        ListElement {
-            cdTitle: "Lets rock"
-            authorName: "John smith"
-            year: 2022
-            genre: "pop"
-            songs: [
-                ListElement {
-                    song: "I am here"
-                },
-                ListElement {
-                    song: "Wasn't easy"
-                }
-            ]
-        }
-        ListElement {
-            cdTitle: "Lets rock"
-            authorName: "John smith"
-            year: 2022
-            genre: "pop"
-            songs: [
-                ListElement {
-                    song: "We are getting there"
-                },
-                ListElement {
-                    song: "Never giving up"
-                }
-            ]
-        }
+//        ListElement {
+//            cdTitle: "a"
+//            artistName: "Bohn smith"
+//            year: 2022
+//            genre: "pop"
+//            songs: [
+//                ListElement {
+//                    song: "I am here"
+//                },
+//                ListElement {
+//                    song: "Wasn't easy"
+//                }
+//            ]
+//        }
+//        ListElement {
+//            cdTitle: "b"
+//            artistName: "Aion smith"
+//            year: 2023
+//            genre: "pop"
+//            songs: [
+//                ListElement {
+//                    song: "We are getting there"
+//                },
+//                ListElement {
+//                    song: "Never giving up"
+//                }
+//            ]
+//        }
     }
 
     Component.onCompleted:  {

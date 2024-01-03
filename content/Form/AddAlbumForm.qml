@@ -1,14 +1,13 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import "../Scripts.js" as Scripts
+import Music
 
 Rectangle {
     id: formFields
-    gradient: Gradient.HeavyRain
-    //        Gradient.ViciousStance
+    gradient: switchStatus < 1 ? Gradient.HeavyRain : Gradient.ViciousStance
     anchors.fill: parent
     radius: 20
-
-    signal submitForm
 
     property string title: titleField.text.trim()
     property string artist: artistField.text.trim()
@@ -25,6 +24,7 @@ Rectangle {
         border.width: 1
         border.color: "grey"
         anchors.centerIn: parent
+        gradient: switchStatus < 1 ? Constants.lightBgGradient : Constants.darkBgGradient
 
         Column {
             id: wrapper
@@ -58,6 +58,7 @@ Rectangle {
                 width: parent.width - 3
                 anchors.margins: 5
                 anchors.horizontalCenter: parent.horizontalCenter
+                gradient: switchStatus < 1 ? Constants.lightBgGradient : Constants.darkBgGradient
 
                 Column {
                     id: formLayout
@@ -172,13 +173,14 @@ Rectangle {
                                 target: submitButton
                                 onClicked: {
                                     if (!title || !artist || !year || !genre) {
-                                        !title ? titleField.isInvalid = true : null
-                                        !artist ? artistField.isInvalid = true : null
-                                        !year && year.length < 4 ? yearField.isInvalid = true : null
+                                        !title ? titleField.isInvalid = true : null;
+                                        !artist ? artistField.isInvalid = true : null;
+                                        !year && year.length < 4 ? yearField.isInvalid = true : null;
                                         !genre ? genreField.isInvalid = true : null
                                     } else {
-                                        submitForm()}
+                                        Scripts.saveDocument(fileio, formFields, musicRecords, toast)
                                     }
+                                }
                             }
                         }
                     }

@@ -13,7 +13,7 @@ TextField {
     property bool isInvalid: false
     property bool isBold: false
     property real radius: 12
-    property color borderColor: activeFocus ? InputStyles.appStyle : isInvalid ? "#f00" : InputStyles.borderColor
+    property color borderColor: activeFocus ? switchStatus < 1 ? "#2a2d36": "#1d5ffe": isInvalid ? "#f00" : "#464a53"
 
     font.bold: isBold ? Font.Bold : Font.Normal
     font.weight: isBold ?Font.Bold : Font.Normal
@@ -30,7 +30,7 @@ TextField {
         implicitHeight: control.height
         implicitWidth: control.width
         radius: control.radius
-        gradient: Constants.lightBgGradient
+        gradient: switchStatus < 1 ? Constants.lightBgGradient : Constants.darkBgGradient
         border.width:  control.activeFocus ? 2 : 1
         border.color: isInvalid ? "#f00" : control.borderColor
     }

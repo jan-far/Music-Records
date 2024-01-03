@@ -2,12 +2,18 @@ import QtQuick 6.2
 import QtQuick.Controls 6.2
 import QtQuick.Layouts
 import Music
+import "./SortFilterModel"
 
 Item {
+    id: containerRoot
     width: parent.width
     height: parent.height
 
     property ListModel musicRecordsModel
+
+    property string currentOrderBy : orderByOptions.get(orderSelect.currentIndex).text
+    property string currentSortBy : sortByOptions.get(sortSelect.currentIndex).value
+    property string searchValue: ""
 
     Rectangle {
         anchors.fill: parent
@@ -23,55 +29,14 @@ Item {
                 Layout.preferredHeight: 60
                 spacing: 8
 
-                Rectangle {
+                SortFilter {
                     id: leftTopBar
-                    Layout.fillWidth: true
-                    Layout.maximumWidth: parent.width * 0.7
-                    height: 50
-                    Layout.leftMargin: 10
-                    color: 'transparent'
-
-                    Row {
-                        id: sortBy
-                        height: parent.height
-                        width: parent.width
-
-                        Text {
-                            id: sortByText
-                            text: qsTr("Sort by: ")
-                            horizontalAlignment: Text.AlignLeft
-                            verticalAlignment: Text.AlignVCenter
-                            font.bold: true
-                            font.pointSize: 16
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.rightMargin: 5
-                        }
-
-                        ComboBox {
-                            width: Constants.calcMin(parent.width * 0.5, 200, 150)
-                            height: 50
-                            anchors.verticalCenter: parent.verticalCenter
-                            model: ListModel {
-                                id: sortByOptions
-                                ListElement {text: "..."}
-                                ListElement {text: qsTr("Artist Name")}
-                                ListElement {text: qsTr("Music Style")}
-                                ListElement {text: qsTr("Production Year")}
-                            }
-                            onCurrentIndexChanged: console.log(sortByOptions.get(currentIndex).text)
-                        }
-                    }
                 }
 
-                Rectangle {
+                ThemeSwitch {
                     id: rightTopBar
-                    Layout.fillWidth: true
-                    Layout.maximumWidth: Constants.calcMin(parent.width * 0.2, 100, 80)
-                    height: 50
-                    color: "#e0dada"
-                    radius: 25
-                    border.color: "#b7c5b3"
                 }
+
             }
 
             ScrollView {
@@ -87,15 +52,41 @@ Item {
                         id: musicRecordListView
                         Layout.fillWidth: true
                         Layout.fillHeight: true
+                        clip: true
 
-                        model: musicRecordsModel
-                        delegate: musicAlbumDelegate
+
+                        Label {
+                            id: emptyHeader
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            visible: parent.count === 0
+                            text: qsTr("Nothing to show yet!")
+                            font.bold: true
+                        }
+
+                        Label {
+                            id: emptyBody
+                            visible: parent.count === 0
+                            text: qsTr("Click on the Add button to add a record!")
+                            anchors.top: emptyHeader.bottom
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.pixelSize: 12
+                            font.weight: 600
+                        }
+
+                        model: SortFilterDelegateModel {
+                            id: sortFilterDelegateModel
+                            model: musicRecords
+                            filter: searchValue ? model => (model.cdTitle + "," + model.artistName + "," + model.genre).toLowerCase().indexOf(searchValue) !== -1 : null
+                            sortRole: currentSortBy
+                            sortOrder: currentOrderBy === "asc" ? Qt.AscendingOrder : Qt.DescendingOrder
+                            delegate: musicAlbumDelegate
+                        }
                     }
                 }
             }
         }
     }
-
 
     Component {
         id: musicAlbumDelegate
@@ -123,7 +114,7 @@ Item {
 
                 CustomLabel {
                     label: "Name of Artist"
-                    value: authorName
+                    value: artistName
                 }
 
                 CustomLabel {
@@ -136,7 +127,7 @@ Item {
                     value: year
                 }
 
-                ScrollView {
+                Column {
                     height: 100
                     width: musicAlbumDelegate.width
 

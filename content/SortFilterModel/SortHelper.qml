@@ -18,7 +18,8 @@ QtObject {
     property var getFunc: null
     property var countFunc: null
     property var moveFunc: null
-    onSortOrderChanged: Qt.calllater(sort)
+
+    onSortOrderChanged: Qt.callLater(sort)
     onSortCaseSensitivityChanged: Qt.callLater(sort)
     onSortRoleChanged: Qt.callLater(sort)
     onSortCompareChanged: Qt.callLater(sort)

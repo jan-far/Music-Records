@@ -9,16 +9,25 @@ import QtQuick 6.2
 import QtQuick.Controls 6.2
 import QtQuick.Layouts
 import Music
+import QtQuick.Timeline 1.0
 
 Rectangle {
     id: rootContainer
     width: Constants.width * 0.4
     height: Constants.height * 0.6
-    gradient: Constants.lightBgGradient
+    gradient: switchStatus < 1 ? Constants.lightBgGradient : Constants.darkBgGradient
 
-    signal openModal
+    PropertyAnimation {
+        id: changeBg
+        target: rootContainer
+        property: rootContainer.gradient
+        easing.bezierCurve: [0.645,0.045,0.355,1,1,1]
+        duration: 251
+        loops: 2
+        paused: false
+        running: true
 
-    property ListModel albumModel
+    }
 
     SplitView {
         id: splitView
@@ -45,7 +54,6 @@ Rectangle {
 
             RightContainerItem {
                 id: rightContainerItem
-                musicRecordsModel: albumModel
             }
         }
     }
@@ -75,7 +83,7 @@ Rectangle {
 
                 Connections {
                     target: addButton
-                    onClicked: openModal()
+                    onClicked: formModal.open()
                 }
             }
         }

@@ -1,10 +1,10 @@
-function getFormData(formModal) {
-    const title = formModal.albumForm.title
-    const artist = formModal.albumForm.artist
-    const year =  Number(formModal.albumForm.year)
-    const genre = formModal.albumForm.genre
+function getFormData(formFields) {
+    const cdTitle = formFields.title
+    const artistName = formFields.artist
+    const year =  Number(formFields.year)
+    const genre = formFields.genre
 
-    const data= {title, artist, year, genre}
+    const data= {cdTitle, artistName, year, genre}
     return data
 }
 
@@ -18,9 +18,9 @@ function getRecords(fileio) {
     return data
 }
 
-function saveDocument(fileio, formModal, model, toast) {
+function saveDocument(fileio, formFields, model, toast) {
     const data = getRecords(fileio)
-    const newRecord = getFormData(formModal)
+    const newRecord = getFormData(formFields)
     data.push(newRecord)
     fileio.text = JSON.stringify(data, null, 4)
     fileio.write()

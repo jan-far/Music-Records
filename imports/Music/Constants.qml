@@ -6,10 +6,6 @@ QtObject {
     readonly property int width: 1920
     readonly property int height: 1080
 
-    function calcMin(mainValue, firstValue, secondValue) {
-        return mainValue > firstValue ? firstValue : mainValue < secondValue ? secondValue : mainValue
-    }
-
     property string relativeFontDirectory: "fonts"
 
     /* Edit this comment to add your custom font */
@@ -22,8 +18,6 @@ QtObject {
                                                   pixelSize: Qt.application.font.pixelSize * 1.6
                                               })
 
-    readonly property color backgroundColor: "#c2c2c2"
-    readonly property color primaryColor: "#0f0"
     readonly property Gradient lightBgGradient: Gradient{
         GradientStop {
             position: 0
@@ -51,8 +45,95 @@ QtObject {
     }
 
 
+    readonly property Gradient darkContainerHover : Gradient {
+        GradientStop {
+            position:  0.3
+            color: "#192338"
+        }
+        GradientStop {
+            position: 0.7
+            color: "#172138"
+        }
+        GradientStop {
+            position: 1
+            color: "#1e2433"
+        }
+    }
 
-//    property StudioApplication application: StudioApplication {
-//        fontPath: Qt.resolvedUrl("../../content/" + relativeFontDirectory)
-//    }
+    readonly property Gradient darkContainerDefault: Gradient{
+        GradientStop {
+            position: 0.15
+            color: "#232426"
+        }
+        GradientStop {
+            position: 0.3
+            color: "#1a202e"
+        }
+
+        property Gradient lightContainerHover: Gradient{
+            GradientStop {
+                position: 0.15
+                color: "#cbcfd6"
+            }
+            GradientStop {
+                position:0.4
+                color:"#bdc2c7"
+            }
+            GradientStop {
+                position: 1
+                color: "#bbbdbf"
+            }
+        }
+
+        property Gradient lightContainerDefault: Gradient{
+            GradientStop {
+                position: 0.15
+                color: "#dcdfe6"
+            }
+            GradientStop {
+                position: 0.4
+                color: "#c9cdd1"
+            }
+            GradientStop {
+                position:1
+                color: "#c6c9cf"
+            }
+        }
+
+    }
+
+
+    readonly property Gradient lightContainerHover: Gradient{
+        GradientStop {
+            position: 0.15
+            color: "#cbcfd6"
+        }
+        GradientStop {
+            position:0.4
+            color:"#bdc2c7"
+        }
+        GradientStop {
+            position: 1
+            color: "#bbbdbf"
+        }
+    }
+
+    readonly property Gradient lightContainerDefault: Gradient{
+        GradientStop {
+            position: 0.15
+            color: "#dcdfe6"
+        }
+        GradientStop {
+            position: 0.4
+            color: "#c9cdd1"
+        }
+        GradientStop {
+            position:1
+            color: "#c6c9cf"
+        }
+    }
+
+    //    property StudioApplication application: StudioApplication {
+    //        fontPath: Qt.resolvedUrl("../../content/" + relativeFontDirectory)
+    //    }
 }

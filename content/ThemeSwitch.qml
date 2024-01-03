@@ -19,7 +19,7 @@ Rectangle {
             property color activeColor: "#d7d7d7"
             property double sizeScale: 1.5
 
-            checked: true
+            checked: false
             anchors.horizontalCenter: parent.horizontalCenter
             onCheckedChanged: {
                 switchStatus = toggleSwitch.position

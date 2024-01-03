@@ -6,7 +6,10 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
     VERSION 1.0
     NO_PLUGIN
     QML_FILES main.qml
-    RESOURCES asset_imports/search.png
+    RESOURCES
+        asset_imports/search.png
+        asset_imports/music_dark.png
+        asset_imports/music_light.png
 )
 
 add_subdirectory(content)

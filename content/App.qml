@@ -21,10 +21,9 @@ Window {
     title: "Music"
 
     property int switchStatus: 0
+    property bool lightMode: switchStatus < 1
 
-    onSwitchStatusChanged: console.log("root: ", switchStatus)
-
-    Material.theme: switchStatus < 1 ? Material.Light : Material.Dark
+    Material.theme: lightMode ? Material.Light : Material.Dark
 
     Fileio {
         id: fileio
@@ -44,34 +43,34 @@ Window {
 
     ListModel {
         id: musicRecords
-//        ListElement {
-//            cdTitle: "a"
-//            artistName: "Bohn smith"
-//            year: 2022
-//            genre: "pop"
-//            songs: [
-//                ListElement {
-//                    song: "I am here"
-//                },
-//                ListElement {
-//                    song: "Wasn't easy"
-//                }
-//            ]
-//        }
-//        ListElement {
-//            cdTitle: "b"
-//            artistName: "Aion smith"
-//            year: 2023
-//            genre: "pop"
-//            songs: [
-//                ListElement {
-//                    song: "We are getting there"
-//                },
-//                ListElement {
-//                    song: "Never giving up"
-//                }
-//            ]
-//        }
+        ListElement {
+            cdTitle: "a"
+            artistName: "Bohn smith"
+            year: 2022
+            genre: "pop"
+            songs: [
+                ListElement {
+                    song: "I am here"
+                },
+                ListElement {
+                    song: "Wasn't easy"
+                }
+            ]
+        }
+        ListElement {
+            cdTitle: "b"
+            artistName: "Aion smith"
+            year: 2023
+            genre: "pop"
+            songs: [
+                ListElement {
+                    song: "We are getting there"
+                },
+                ListElement {
+                    song: "Never giving up"
+                }
+            ]
+        }
     }
 
     Component.onCompleted:  {

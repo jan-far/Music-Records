@@ -15,19 +15,30 @@ Rectangle {
     id: rootContainer
     width: Constants.width * 0.4
     height: Constants.height * 0.6
-    gradient: switchStatus < 1 ? Constants.lightBgGradient : Constants.darkBgGradient
+    gradient: lightMode ? Constants.lightBgGradient : Constants.darkBgGradient
 
     PropertyAnimation {
         id: changeBg
         target: rootContainer
         property: rootContainer.gradient
-        easing.bezierCurve: [0.645,0.045,0.355,1,1,1]
+        easing.bezierCurve: [0.645, 0.045, 0.355, 1, 1, 1]
         duration: 251
         loops: 2
         paused: false
         running: true
-
     }
+    
+//    Rectangle {
+//        id: rightContainer
+////        SplitView.fillWidth: true
+////        implicitHeight: parent.height
+//        anchors.fill:parent
+//        color: "transparent"
+
+//        RightContainerItem {
+//            id: rightContainerItem
+//        }
+//    }
 
     SplitView {
         id: splitView
@@ -71,14 +82,14 @@ Rectangle {
             height: 45
             color: "green"
             radius: 50
-            gradient: Gradient.GrassShampoo
+            gradient: lightMode ? Gradient.SoftGrass : Gradient.NightSky
             anchors.horizontalCenter: parent.horizontalCenter
 
             RoundButton {
                 id: addButton
                 text: "+"
-                anchors.verticalCenter: parent.verticalCenter
                 hoverEnabled: false
+                anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 Connections {
@@ -87,6 +98,7 @@ Rectangle {
                 }
             }
         }
+
         Label {
             text: qsTr("Add CD")
             font.bold: true

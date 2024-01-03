@@ -22,6 +22,28 @@ Item {
         ColumnLayout {
             id: rightColumn
             anchors.fill: parent
+            
+//            Rectangle {
+//                id: searchFieldWrapper
+//                Layout.preferredWidth: parent.width
+//                Layout.preferredHeight: 60
+//                color: "transparent"
+    
+//                TextField {
+//                    id: searchField
+//                    width: parent.width * 0.9
+//                    height: 38
+//                    selectionColor: "#010113"
+//                    placeholderText: qsTr("Search")
+//                    cursorVisible: true
+//                    font.pointSize: 14
+//                    anchors.horizontalCenter: parent.horizontalCenter
+//                    anchors.verticalCenter: parent.verticalCenter
+//                    onTextChanged: () => {
+//                                       rightContainerItem.searchValue = searchField.text.toLowerCase()
+//                                   }
+//                }
+//            }
 
             RowLayout {
                 id: topBar
@@ -56,7 +78,6 @@ Item {
 
 
                         Label {
-                            id: emptyHeader
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
                             visible: parent.count === 0
@@ -65,7 +86,6 @@ Item {
                         }
 
                         Label {
-                            id: emptyBody
                             visible: parent.count === 0
                             text: qsTr("Click on the Add button to add a record!")
                             anchors.top: emptyHeader.bottom
@@ -91,64 +111,94 @@ Item {
     Component {
         id: musicAlbumDelegate
 
-        Row {
-            spacing: 15
-            padding: 10
+        Pane {
+            property Gradient gradientStatus:
+                lightMode ?
+                    ma.containsMouse ?
+                        Constants.lightContainerHover:
+                        Constants.lightContainerDefault
+                    :ma.containsMouse ?
+                        Constants.darkContainerHover :
+                        Constants.darkContainerDefault
 
-            Rectangle {
-                id: imageContainer
-                width: 150
-                height: 150
-                color: 'green'
-                radius: 25
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.leftMargin: 20
+            anchors.rightMargin: 20
+            bottomInset: 10
+            topInset: 5
+            height: 200
+            background: Rectangle {
+                gradient: gradientStatus
+                radius: 10
             }
 
-            Column {
-                topPadding: 5
-                spacing: 5
+            MouseArea {
+                id: ma
+                anchors.fill: parent
+                hoverEnabled: true
+            }
 
-                CustomLabel  {
-                    label: "CD Title"
-                    value: cdTitle
-                }
 
-                CustomLabel {
-                    label: "Name of Artist"
-                    value: artistName
-                }
+            Row {
+                spacing: 15
+                padding: 10
 
-                CustomLabel {
-                    label: "Music style"
-                    value: genre
-                }
-
-                CustomLabel {
-                    label: "Production Year"
-                    value: year
+                Image {
+                    id: albumImage
+                    source: lightMode ? "qrc:/Main/asset_imports/music_light.png" : "qrc:/Main/asset_imports/music_dark.png"
+                    width: 150
+                    height: 150
+                    fillMode: Image.PreserveAspectFit
                 }
 
                 Column {
-                    height: 100
-                    width: musicAlbumDelegate.width
+                    topPadding: 5
+                    spacing: 5
 
-                    Row {
-                        Text {
-                            text: "Songs: "
-                            font.bold: true
-                        }
+                    CustomLabel  {
+                        label: "CD Title"
+                        value: cdTitle
+                    }
 
-                        Column {
-                            spacing: 2
-                            Repeater {
-                                model: songs
-                                Row {
-                                    Text {
-                                        text: " - "
-                                        font.pixelSize: 14
-                                        font.bold: true
-                                    }
-                                    Text {
-                                        text: song
+                    CustomLabel {
+                        label: "Name of Artist"
+                        value: artistName
+                    }
+
+                    CustomLabel {
+                        label: "Music style"
+                        value: genre
+                    }
+
+                    CustomLabel {
+                        label: "Production Year"
+                        value: year
+                    }
+
+                    Column {
+                        height: 100
+                        width: musicAlbumDelegate.width
+
+                        Row {
+                            Label {
+                                text: "Songs: "
+                                font.bold: true
+                            }
+
+                            Column {
+                                spacing: 2
+                                Repeater {
+                                    model: songs
+                                    Row {
+                                        Label {
+                                            text: " - "
+                                            font.pixelSize: 14
+                                            font.bold: true
+                                        }
+                                        Label {
+                                            text: song
+                                        }
                                     }
                                 }
                             }
@@ -165,12 +215,12 @@ Item {
 
         spacing: 1
 
-        Text {
+        Label {
             text: label + ": "
             font.bold: true
         }
 
-        Text {
+        Label {
             text: value
         }
     }

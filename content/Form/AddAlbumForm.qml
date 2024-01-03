@@ -5,7 +5,7 @@ import Music
 
 Rectangle {
     id: formFields
-    gradient: switchStatus < 1 ? Gradient.HeavyRain : Gradient.ViciousStance
+    gradient: lightMode ? Gradient.HeavyRain : Gradient.ViciousStance
     anchors.fill: parent
     radius: 20
 
@@ -13,6 +13,7 @@ Rectangle {
     property string artist: artistField.text.trim()
     property string year: yearField.text.trim()
     property string genre: genreField.text.trim()
+    property string songs: songsField.text.trim()
 
     Rectangle {
         anchors.fill: parent
@@ -24,7 +25,7 @@ Rectangle {
         border.width: 1
         border.color: "grey"
         anchors.centerIn: parent
-        gradient: switchStatus < 1 ? Constants.lightBgGradient : Constants.darkBgGradient
+        gradient: lightMode ? Constants.lightBgGradient : Constants.darkBgGradient
 
         Column {
             id: wrapper
@@ -58,7 +59,7 @@ Rectangle {
                 width: parent.width - 3
                 anchors.margins: 5
                 anchors.horizontalCenter: parent.horizontalCenter
-                gradient: switchStatus < 1 ? Constants.lightBgGradient : Constants.darkBgGradient
+                gradient: lightMode ? Constants.lightBgGradient : Constants.darkBgGradient
 
                 Column {
                     id: formLayout
@@ -157,6 +158,54 @@ Rectangle {
                             verticalAlignment: Text.AlignVCenter
                         }
                     }
+
+                    Column {
+                        width: parent.width
+                        height: 80
+                        spacing: -5
+
+                        Row {
+                            id: songsRow
+                            width: parent.width * 0.7
+                            height: 60
+                            spacing: 8
+                            anchors.horizontalCenter: parent.horizontalCenter
+
+                            Label {
+                                text: qsTr("Songs: ")
+                                verticalAlignment: Text.AlignVCenter
+                                font.bold: true
+                                height: parent.height
+                            }
+
+                            CustomTextField {
+                                id: songsField
+                                width: 200
+                                height: 40
+                                anchors.verticalCenter: parent.verticalCenter
+                                verticalAlignment: Text.AlignVCenter
+                            }
+                        }
+
+                        Rectangle {
+                            width: parent.width * 0.7
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            height: 10
+                            anchors.leftMargin: 8
+                            color: "transparent"
+
+                            Label {
+                                id: songsHint
+                                anchors.verticalCenter: parent.verticalCenter
+                                text: qsTr("Hint: You can enter more than one song, seperate with comma','")
+                                font.pixelSize: 9
+                                font.weight: 500
+                                anchors.left: parent.left
+                                anchors.leftMargin: 10
+                            }
+                        }
+                    }
+
 
                     Rectangle {
                         id: submit

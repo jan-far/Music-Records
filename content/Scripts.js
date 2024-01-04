@@ -34,8 +34,8 @@ function saveDocument(fileio, formFields, model, toast) {
 function populateListModel(fileio, model) {
     const albumsArray = Scripts.getRecords(fileio)
     albumsArray.forEach((album) => {
-                            album.songs = album.songs.map(song => ({song}))
                             model.append(album)
+                            console.log("rec: ", JSON.stringify(album))
                         })
 }
 
@@ -43,3 +43,38 @@ function populateListModel(fileio, model) {
 function calcMin(mainValue, firstValue, secondValue) {
     return mainValue > firstValue ? firstValue : mainValue < secondValue ? secondValue : mainValue
 }
+
+function getInitials(model, key = "cdTitle") {
+    const initials = []
+    const alphabets = generateLetters()
+    for (let i = 0; i < model.count; i++) {
+        const letter = model.get(i)[key][0].toUpperCase()
+        initials.push(letter)
+    }
+    const aval = alphabets.map(a => {
+                                   if (initials.indexOf(a) !== -1)  {
+                                       return ({letter: a, exists: true})
+                                   } else {
+                                       return ({letter: a, exists: false})
+                                   }}
+                               )
+    return aval
+}
+
+function generateLetters() {
+    const alpha = Array.from(Array(26)).map((e, i) => i + 65);
+    const alphabet = alpha.map((x) => String.fromCharCode(x));
+    return alphabet
+}
+
+function getThemeGradient(mouseArea, button) {
+    return  lightMode ?
+                mouseArea.containsMouse ?
+                    Constants.lightContainerHover:
+                    Constants.lightContainerDefault
+    :mouseArea.containsMouse ?
+         Constants.darkContainerHover :
+         Constants.darkContainerDefault
+
+}
+

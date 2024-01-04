@@ -16,7 +16,7 @@ Rectangle {
 
         Switch {
             id: toggleSwitch
-            property color activeColor: "#d7d7d7"
+            property color activeColor: "#5c5470"
             property double sizeScale: 1.5
 
             checked: false

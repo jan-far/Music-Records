@@ -7,7 +7,3 @@ qt6_add_qml_module(Fileio
         fileio.h
         fileio.cpp
 )
-
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
-    Fileioplugin
-)

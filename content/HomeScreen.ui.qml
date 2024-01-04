@@ -17,29 +17,6 @@ Rectangle {
     height: Constants.height * 0.6
     gradient: lightMode ? Constants.lightBgGradient : Constants.darkBgGradient
 
-    PropertyAnimation {
-        id: changeBg
-        target: rootContainer
-        property: rootContainer.gradient
-        easing.bezierCurve: [0.645, 0.045, 0.355, 1, 1, 1]
-        duration: 251
-        loops: 2
-        paused: false
-        running: true
-    }
-    
-//    Rectangle {
-//        id: rightContainer
-////        SplitView.fillWidth: true
-////        implicitHeight: parent.height
-//        anchors.fill:parent
-//        color: "transparent"
-
-//        RightContainerItem {
-//            id: rightContainerItem
-//        }
-//    }
-
     SplitView {
         id: splitView
         anchors.fill: parent
@@ -92,8 +69,9 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                Connections {
-                    target: addButton
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
                     onClicked: formModal.open()
                 }
             }

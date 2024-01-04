@@ -1,4 +1,6 @@
 Module content
 CustomBorder 1.0 CustomBorder.qml
+HomeScreen 1.0 HomeScreen.ui.qml
 LeftContainerItem 1.0 LeftContainerItem.qml
 RightContainerItem 1.0 RightContainerItem.qml
+ThemeSwitch 1.0 ThemeSwitch.qml

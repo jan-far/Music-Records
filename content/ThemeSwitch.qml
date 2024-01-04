@@ -19,11 +19,12 @@ Rectangle {
             property color activeColor: "#5c5470"
             property double sizeScale: 1.5
 
-            checked: false
+            checked: switchStatus < 1 ? false : true
             anchors.horizontalCenter: parent.horizontalCenter
             onCheckedChanged: {
                 switchStatus = toggleSwitch.position
-                console.log('change::: ', toggleSwitch.position)}
+                settings.theme = toggleSwitch.position
+            }
 
             indicator: Rectangle {
                 implicitWidth: 40 * toggleSwitch.sizeScale
@@ -60,6 +61,4 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
-
-    Component.onCompleted: switchStatus = toggleSwitch.position
 }

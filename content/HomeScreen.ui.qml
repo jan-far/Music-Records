@@ -10,6 +10,7 @@ import QtQuick.Controls 6.2
 import QtQuick.Layouts
 import Music
 import QtQuick.Timeline 1.0
+import QtCore
 
 Rectangle {
     id: rootContainer

@@ -33,10 +33,7 @@ function saveDocument(fileio, formFields, model, toast) {
 
 function populateListModel(fileio, model) {
     const albumsArray = Scripts.getRecords(fileio)
-    albumsArray.forEach((album) => {
-                            model.append(album)
-                            console.log("rec: ", JSON.stringify(album))
-                        })
+    albumsArray.forEach((album) => model.append(album))
 }
 
 
@@ -75,6 +72,5 @@ function getThemeGradient(mouseArea, button) {
     :mouseArea.containsMouse ?
          Constants.darkContainerHover :
          Constants.darkContainerDefault
-
 }
 

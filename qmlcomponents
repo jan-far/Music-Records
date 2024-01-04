@@ -3,7 +3,7 @@
 
 message("Building designer components.")
 
-set(QT_QML_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/qml")
+set(QT_QML_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/qt/qml")
 
 include(FetchContent)
 FetchContent_Declare(

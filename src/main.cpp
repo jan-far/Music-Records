@@ -16,11 +16,15 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
+    app.setOrganizationName("Farouk-Project");
+    app.setApplicationDisplayName("Music Database");
+    app.setApplicationName("Music Database");
+
     qmlRegisterType<Fileio>("Fileio", 1, 0, "Fileio");
 //    qmlRegisterSingletonType(QUrl("qrc:/Music/Constants.qml"),"Constants", 1, 0,"Constants");
 
     QQmlApplicationEngine engine;
-    const QUrl url(u"qrc:Main/main.qml"_qs);
+    const QUrl url(u"qrc:qt/qml/Main/main.qml"_qs);
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated, &app,
         [url](QObject *obj, const QUrl &objUrl) {
@@ -29,9 +33,8 @@ int main(int argc, char *argv[])
         },
         Qt::QueuedConnection);
 
-    engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
+    engine.addImportPath(QCoreApplication::applicationDirPath() + "/qt/qml");
     engine.addImportPath(":/");
-    engine.addImportPath("qrc:/");
 
     engine.load(url);
 

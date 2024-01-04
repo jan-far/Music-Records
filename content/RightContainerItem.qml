@@ -144,7 +144,7 @@ Item {
 
                     Image {
                         id: albumImage
-                        source: lightMode ? "qrc:/Main/asset_imports/music_light.png" : "qrc:/Main/asset_imports/music_dark.png"
+                        source: lightMode ? "qrc:qt/qml/Main/asset_imports/music_light.png" : "qrc:qt/qml/Main/asset_imports/music_dark.png"
                         width: 150
                         height: 150
                         fillMode: Image.PreserveAspectFit
@@ -203,6 +203,7 @@ Item {
                                     }
 
                                     Repeater {
+                                        id: songsRepeater
                                         model: songs
                                         Row {
                                             spacing: 3
@@ -213,7 +214,7 @@ Item {
                                                 anchors.verticalCenter: parent.verticalCenter
                                             }
                                             Label {
-                                                text: song +"¸"
+                                                text: song + `${(index !== songs.count - 1) ? "¸" : ""}`
                                             }
                                         }
                                     }

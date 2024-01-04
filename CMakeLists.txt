@@ -13,6 +13,8 @@ if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
 endif()
 
+qt_policy(SET QTP0001 NEW)
+
 qt_add_executable(MusicApp src/main.cpp
 )
 

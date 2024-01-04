@@ -5,7 +5,7 @@ Fileio::Fileio(QObject *parent)
     ,m_source("record.json")
 {
     appLocation = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
-    qWarning() << "location: " << appLocation.first();
+    qInfo() << "location: " << appLocation.first();
     this->read();
 }
 

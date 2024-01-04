@@ -4,8 +4,9 @@
 import QtQuick 6.2
 import QtQuick.Controls
 import QtQuick.Layouts
-import Music
 import QtQuick.Dialogs
+import QtCore
+import Music
 import Fileio
 import "Scripts.js" as Scripts
 import './Form'
@@ -22,10 +23,16 @@ Window {
     visible: true
     title: "Music"
 
-    property int switchStatus: 0
+    property int switchStatus: settings.theme ?? Material.theme
     property bool lightMode: switchStatus < 1
 
-    Material.theme: lightMode ? Material.Light : Material.Dark
+    Material.theme: root.switchStatus
+
+    Settings {
+        id: settings
+        category: "Theme"
+        property alias theme: root.switchStatus
+    }
 
     Fileio {
         id: fileio
